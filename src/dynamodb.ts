@@ -40,10 +40,12 @@ interface ScanItemsParams {
     };
 }
 
+// Used for upserting items
 export const updateItem = async (
     params: UpdateItemParams
 ): Promise<AWS.DynamoDB.DocumentClient.UpdateItemOutput> => {
     const query = {
+        ReturnValues: "ALL_NEW",
         ...params
     };
 
@@ -66,6 +68,7 @@ export const buildExpression = (body: any) => {
         .join(", ");
 };
 
+// collect all fields in a JSON objct into DynamoDB attributes
 export const buildAttributes = (body: any) => {
     return Object.fromEntries(
         Object.entries(body).map(([key, value]) => [
@@ -77,6 +80,7 @@ export const buildAttributes = (body: any) => {
     );
 };
 
+// Used for getting items based on a key
 export const getItem = async (
     params: GetItemParams
 ): Promise<AWS.DynamoDB.DocumentClient.GetItemOutput> => {
@@ -96,6 +100,7 @@ export const getItem = async (
     });
 };
 
+// Used for searching tables
 export const scanItems = async (
     params: ScanItemsParams
 ): Promise<AWS.DynamoDB.DocumentClient.ScanOutput> => {
@@ -115,10 +120,12 @@ export const scanItems = async (
     });
 };
 
+// Used for deleting items
 export const deleteItem = async (
     params: DeleteItemParams
 ): Promise<AWS.DynamoDB.DocumentClient.DeleteItemOutput> => {
     const query = {
+        ReturnValues: "ALL_OLD",
         ...params
     };
 
