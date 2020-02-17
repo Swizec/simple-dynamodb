@@ -1,0 +1,21 @@
+{
+    "name": "simple-dynamodb",
+    "version": "1.0.0",
+    "description": "A simple wrapper to help you work with DynamoDB",
+    "repository": "git@github.com:Swizec/simple-dynamodb.git",
+    "author": "Swizec Teller <swizec@swizec.com>",
+    "license": "MIT",
+    "source": "src/dynamodb.ts",
+    "main": "dist/dynamodb.js",
+    "scripts": {
+        "build": "microbundle",
+        "dev": "microbundle watch"
+    },
+    "devDependencies": {
+        "@types/aws-sdk": "^2.7.0",
+        "microbundle": "^0.11.0"
+    },
+    "peerDependencies": {
+        "aws-sdk": "^2.619.0"
+    }
+}
