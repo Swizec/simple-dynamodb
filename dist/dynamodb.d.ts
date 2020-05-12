@@ -32,6 +32,7 @@ interface ScanItemsParams {
     ExpressionAttributeValues?: {
         [key: string]: string | number | undefined | null;
     };
+    Limit?: number;
 }
 export declare const updateItem: (params: UpdateItemParams) => Promise<DynamoDB.DocumentClient.UpdateItemOutput>;
 export declare const buildExpression: (body: any) => string;
