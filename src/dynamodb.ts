@@ -38,6 +38,7 @@ interface ScanItemsParams {
     ExpressionAttributeValues?: {
         [key: string]: string | number | undefined | null;
     };
+    Limit?: number;
 }
 
 // Used for upserting items
@@ -46,7 +47,7 @@ export const updateItem = async (
 ): Promise<AWS.DynamoDB.DocumentClient.UpdateItemOutput> => {
     const query = {
         ReturnValues: "ALL_NEW",
-        ...params
+        ...params,
     };
 
     return new Promise((resolve, reject) => {
@@ -75,7 +76,7 @@ export const buildAttributes = (body: any) => {
             `:${key}`,
             typeof value === "string" || typeof value === "number"
                 ? value
-                : JSON.stringify(value)
+                : JSON.stringify(value),
         ])
     );
 };
@@ -85,7 +86,7 @@ export const getItem = async (
     params: GetItemParams
 ): Promise<AWS.DynamoDB.DocumentClient.GetItemOutput> => {
     const query = {
-        ...params
+        ...params,
     };
 
     return new Promise((resolve, reject) => {
@@ -105,7 +106,7 @@ export const scanItems = async (
     params: ScanItemsParams
 ): Promise<AWS.DynamoDB.DocumentClient.ScanOutput> => {
     const query = {
-        ...params
+        ...params,
     };
 
     return new Promise((resolve, reject) => {
@@ -126,7 +127,7 @@ export const deleteItem = async (
 ): Promise<AWS.DynamoDB.DocumentClient.DeleteItemOutput> => {
     const query = {
         ReturnValues: "ALL_OLD",
-        ...params
+        ...params,
     };
 
     return new Promise((resolve, reject) => {
